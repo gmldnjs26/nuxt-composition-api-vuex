@@ -1,8 +1,5 @@
 <template>
-  <div>
-    asdasd
-    {{ hoge }}
-  </div>
+  <div>{{ hogeName }} / {{ hogeCounter }}</div>
 </template>
 
 <script lang="ts">
@@ -16,10 +13,17 @@ export default defineComponent({
     const hoge = computed<HogeType>(() => {
       return store.getters['hoge/getHoge']
     })
-    console.log('hoge', hoge)
+    const hogeName = computed<HogeType>(() => {
+      return store.getters['hoge/getHogeName']
+    })
+    const hogeCounter = computed<HogeType>(() => {
+      return store.getters['hoge/getHogeCounter']
+    })
 
     return {
       hoge,
+      hogeName,
+      hogeCounter,
     }
   },
 })
