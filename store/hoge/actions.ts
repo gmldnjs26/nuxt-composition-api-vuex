@@ -5,8 +5,8 @@ const actions: ActionTree<HogeType, HogeType> = {
   incrementHogeCount({ commit }, num: number) {
     commit('setHogeCount', num)
   },
-  changeHogeName({ commit }, num: number) {
-    commit('setHogeName', num)
+  changeHogeName({ commit }, name: string) {
+    commit('setHogeName', name)
   },
 }
 

@@ -1,29 +1,38 @@
 <template>
-  <div>{{ hogeName }} / {{ hogeCounter }}</div>
+  <div>
+    {{ hogeName }} / {{ hogeCounter }}
+    <div>
+      <button @click="changeName">Name</button>
+      <button @click="changeCount">Count</button>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, useStore, computed } from '@nuxtjs/composition-api'
-import { HogeType } from '@/store/hoge/types'
 
 export default defineComponent({
   name: 'IndexPage',
   setup() {
     const store = useStore()
-    const hoge = computed<HogeType>(() => {
-      return store.getters['hoge/getHoge']
-    })
-    const hogeName = computed<HogeType>(() => {
+    const hogeName = computed<string>(() => {
       return store.getters['hoge/getHogeName']
     })
-    const hogeCounter = computed<HogeType>(() => {
+    const hogeCounter = computed<number>(() => {
       return store.getters['hoge/getHogeCounter']
     })
+    const changeCount = () => {
+      store.dispatch('hoge/incrementHogeCount', hogeCounter.value + 1)
+    }
+    const changeName = () => {
+      store.dispatch('hoge/changeHogeName')
+    }
 
     return {
-      hoge,
       hogeName,
       hogeCounter,
+      changeCount,
+      changeName,
     }
   },
 })
