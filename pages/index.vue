@@ -4,6 +4,7 @@
     <div>
       <button @click="changeName">Name</button>
       <button @click="changeCount">Count</button>
+      <button @click="changeHoge">All</button>
     </div>
   </div>
 </template>
@@ -16,16 +17,19 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const hogeName = computed<string>(() => {
-      return store.getters['hoge/getHogeName']
+      return store.getters['hoge/getNestedHogeName']
     })
     const hogeCounter = computed<number>(() => {
-      return store.getters['hoge/getHogeCounter']
+      return store.getters['hoge/getNestedHogeCounter']
     })
     const changeCount = () => {
-      store.dispatch('hoge/incrementHogeCount', hogeCounter.value + 1)
+      store.dispatch('hoge/incrementNestedHogeCount', hogeCounter.value + 1)
     }
     const changeName = () => {
-      store.dispatch('hoge/changeHogeName')
+      store.dispatch('hoge/changeNestedHogeName', 'sampleName')
+    }
+    const changeHoge = () => {
+      store.dispatch('hoge/chageHoge', { hogeCount: 999, hogeName: 'reative' })
     }
 
     return {
@@ -33,6 +37,7 @@ export default defineComponent({
       hogeCounter,
       changeCount,
       changeName,
+      changeHoge,
     }
   },
 })

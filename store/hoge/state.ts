@@ -1,13 +1,14 @@
-import { reactive } from '@nuxtjs/composition-api'
 import { HogeType } from './types'
 
-const state = (): HogeType => {
-  return reactive({
-    hoge: {
-      hogeCount: 10,
-      hogeName: 'test',
+const state = (): HogeType => ({
+  hoge: {
+    hogeCount: 10,
+    hogeName: 'test',
+    nestedHoge: {
+      hogeCount: 20,
+      hogeName: 'test2',
     },
-  })
-}
+  },
+})
 
 export default state
